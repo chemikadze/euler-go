@@ -1,7 +1,7 @@
 package eutil
 
 // import (
-// 	"math"
+// 	"fmt"
 // )
 
 var primeNumbers = make([]int, 0)
@@ -24,6 +24,7 @@ func init() {
 		if !notPrime {
 			primeNumbers = append(primeNumbers, i)
 		}
+		primes[i] = !primes[i]
 	}
 	return
 }
@@ -31,6 +32,22 @@ func init() {
 type Factor struct {
 	Prime int
 	Count int
+}
+
+func IsPrime(number int) bool {
+	if number < 0 {
+		number = -number
+	}
+	if number < maxprime {
+		return primes[number]
+	} else {
+		for i := 2; i < number/2; i += 1 {
+			if number%i == 0 {
+				return false
+			}
+		}
+		return true
+	}
 }
 
 func PrimeFactors(number int) []Factor {
